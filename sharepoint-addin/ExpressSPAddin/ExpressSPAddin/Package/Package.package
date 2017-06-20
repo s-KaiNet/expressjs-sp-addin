@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="ad108745-c91e-4f40-86e3-6e4d04b3ecb6" solutionId="ad108745-c91e-4f40-86e3-6e4d04b3ecb6" resetWebServer="false" sharePointProductVersion="15.0" name="ExpressSPAddin" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="84a9d402-344c-45bf-bdc3-eebdeae51440" />
+  </features>
+</package>

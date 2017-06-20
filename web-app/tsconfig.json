@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": [
+            "es6",
+            "es2015",
+            "dom"
+        ],
+        "types": [
+            "sharepoint",
+            "core-js"
+        ],
+        "outDir": "dist",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": true,
+        "strictNullChecks": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "inlineSources": true,
+        "experimentalDecorators": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "./src/**/*"
+    ]
+}
