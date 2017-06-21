@@ -2,7 +2,7 @@ import { Request, Response, Router, NextFunction } from 'express';
 import * as pnp from 'c:/Projects/gh/frk/PnP-JS-Core/src/pnp';
 
 import { oauthConfig } from '../config/private.config';
-import { SPContextProvider } from '../temp';
+import { SPContextProvider } from 'passport-sharepoint-addin';
 
 export class IndexRoute {
   public router = Router();
@@ -13,7 +13,7 @@ export class IndexRoute {
   }
 
   public index(req: Request, res: Response, next: NextFunction): void {
-    let ctx = SPContextProvider.get(req.user.authData, oauthConfig);
+    const ctx = SPContextProvider.get(req.user.authData, oauthConfig);
 
     ctx.getUserAccessTokenForSPHost()
       .then(token => {

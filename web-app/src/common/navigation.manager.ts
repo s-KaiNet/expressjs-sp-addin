@@ -3,19 +3,24 @@ import * as crypto from 'crypto';
 import utils from './utils';
 
 export default class NavigationManager {
+
+    public getHostByShortHandUrl(shortUrl: string): Promise<IHostModel> {
+       return Host
+            .findOne({ shortHandUrl: shortUrl })
+            .then(d => {
+                return d;
+            });
+    }
+
     public getHostByUrl(url: string): Promise<IHostModel> {
         const hostUrl = utils.ensureTrailingSlash(url);
 
-        return Host
-            .find()
-            .then((hosts: IHostModel[]) => {
-                return Promise.all([hosts, Host.findOne({ 'url': hostUrl })]);
-            })
+        return Promise.all([Host.find(), Host.findOne({ 'url': hostUrl })])
             .then((data) => {
                 const allHosts: string[] = data[0].map(host => {
                     return host.shortHandUrl;
                 });
-                let currentHost: IHostModel = data[1];
+                const currentHost: IHostModel = data[1];
 
                 if (!currentHost) {
 
@@ -38,7 +43,7 @@ export default class NavigationManager {
 
     private getRandomString(): string {
         let text: string = '';
-        let possible: string = 'abcdefghijklmnopqrstuvwxyz';
+        const possible: string = 'abcdefghijklmnopqrstuvwxyz';
         for (let i = 0; i < 5; i++) {
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         }

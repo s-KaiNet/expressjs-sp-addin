@@ -2,13 +2,14 @@ import * as passport from 'passport';
 
 import { User } from '../models/user';
 import { callbackUrl } from './sharepoint.auth';
-import { SharePointAddinStrategy } from '../temp';
+import { SharePointAddinStrategy } from 'passport-sharepoint-addin';
 
 import { ISessionUser } from '../common/ISessionUser';
-import { IAuthData } from '../temp';
-import { ISharePointProfile } from '../temp';
+import { IAuthData } from 'passport-sharepoint-addin';
+import { ISharePointProfile } from 'passport-sharepoint-addin';
 import config from './config';
 import { oauthConfig as oauthSettings } from './private.config';
+import NavigationManager from '../common/navigation.manager';
 
 export default function (passport: passport.Passport) {
 
@@ -38,17 +39,24 @@ export default function (passport: passport.Passport) {
                     return user;
                 }
 
-                let newUser = new User();
+                const newUser = new User();
                 newUser.sharepoint.email = profile.email;
                 newUser.sharepoint.name = profile.displayName;
                 newUser.sharepoint.username = profile.username;
                 return newUser.save();
             })
             .then(user => {
-                return {
+                const sessionUser = {
                     dbUser: user,
                     authData: profile.authData
-                }
+                } as ISessionUser;
+                const hostUrl = sessionUser.authData.spHostUrl;
+                const navManager: NavigationManager = new NavigationManager();
+                return Promise.all([navManager.getHostByUrl(hostUrl), sessionUser]);
+            })
+            .then(data => {
+                data[1].authData.shortHandUrl = data[0].shortHandUrl;
+                return data[1];
             });
     }));
 };

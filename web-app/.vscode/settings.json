@@ -8,5 +8,6 @@
         "**/.DS_Store": true,
         "node_modules/": true
     },
-    "tslint.autoFixOnSave": true
+    "tslint.autoFixOnSave": true,
+    "typescript.disableAutomaticTypeAcquisition": true
 }

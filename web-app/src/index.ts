@@ -6,25 +6,25 @@ import * as fs from 'fs';
  */
 
 import express from './config/express';
-let debug = require('debug')('express-start:server');
-let https = require('https');
+const debug = require('debug')('express-start:server');
+const https = require('https');
 
 /**
  * Get port from environment and store in Express.
  */
-let app: Application = express.bootstrap().app;
-let port = normalizePort(process.env.PORT || '44355');
+const app: Application = express.bootstrap().app;
+const port = normalizePort(process.env.PORT || '44355');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-let creds = {
+const creds = {
   key: fs.readFileSync('./cert/key.pem'),
   cert: fs.readFileSync('./cert/cert.pem')
 };
 
-let server = https.createServer(creds, app);
+const server = https.createServer(creds, app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -39,7 +39,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val: any) {
-  let port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -63,7 +63,7 @@ function onError(error: any) {
     throw error;
   }
 
-  let bind = typeof port === 'string'
+  const bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -87,8 +87,8 @@ function onError(error: any) {
  */
 
 function onListening() {
-  let addr = server.address();
-  let bind = typeof addr === 'string'
+  const addr = server.address();
+  const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);

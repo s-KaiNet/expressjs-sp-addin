@@ -48,10 +48,11 @@
     "morgan": "~1.8.1",
     "node-fetch": "^1.7.1",
     "passport": "^0.3.2",
+    "passport-sharepoint-addin": "0.0.8",
     "passport-strategy": "^1.0.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "serve-favicon": "~2.4.2",
+    "serve-favicon": "^2.4.3",
     "tslint-config-standard": "^6.0.1"
   },
   "devDependencies": {

@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as passport from 'passport';
 import * as session from 'express-session';
+import * as favicon from 'serve-favicon';
 import config from './config';
 import configurePassport from './passport';
 import * as nodeFetch from 'node-fetch';
@@ -15,7 +16,6 @@ import * as pnp from 'c:/Projects/gh/frk/PnP-JS-Core/src/pnp';
 declare var global: any;
 
 import { Application, Request, Response, NextFunction } from 'express';
-// import googleAuth from './google.auth';
 import spauth from './sharepoint.auth';
 
 export default class Server {
@@ -32,6 +32,9 @@ export default class Server {
     }
 
     private config(): void {
+
+        this.app.use(favicon(path.join(__dirname, '../../public', 'favicon.ico')));
+
         configurePassport(passport);
 
         (mongoose as any).Promise = global.Promise;
@@ -61,7 +64,7 @@ export default class Server {
 
         // catch 404 and forward to error handler
         this.app.use((req: Request, res: Response, next: NextFunction) => {
-            let err: any = new Error('Not Found');
+            const err: any = new Error('Not Found');
             err.status = 404;
             next(err);
         });
@@ -80,12 +83,11 @@ export default class Server {
 
     private configureAuth(): void {
         spauth(this.app, passport);
-        // googleAuth(this.app, passport);
     }
 
     private routes(): void {
-        for (let routePath of config.globFiles(config.routes)) {
-            let router = require(path.resolve(routePath)).default;
+        for (const routePath of config.globFiles(config.routes)) {
+            const router = require(path.resolve(routePath)).default;
             this.app.use('/:shortUrl', router);
         }
     }
