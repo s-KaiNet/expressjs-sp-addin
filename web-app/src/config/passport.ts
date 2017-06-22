@@ -33,7 +33,7 @@ export default function (passport: passport.Passport) {
     });
 
     passport.use(new SharePointAddinStrategy(oauthSettings, `${config.appUrl}${callbackUrl}`, (profile: ISharePointProfile) => {
-        return User.findOne({ 'sharepoint.name': profile.username })
+        return User.findOne({ 'sharepoint.loginName': profile.loginName })
             .then(user => {
                 if (user) {
                     return user;
@@ -41,8 +41,8 @@ export default function (passport: passport.Passport) {
 
                 const newUser = new User();
                 newUser.sharepoint.email = profile.email;
-                newUser.sharepoint.name = profile.displayName;
-                newUser.sharepoint.username = profile.username;
+                newUser.sharepoint.loginName = profile.loginName;
+                newUser.sharepoint.displayName = profile.displayName;
                 return newUser.save();
             })
             .then(user => {

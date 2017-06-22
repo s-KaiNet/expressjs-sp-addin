@@ -27,7 +27,7 @@ export class IndexRoute {
       .then(web => {
         res.render('index', {
           title: 'Express',
-          username: req.user.dbUser.sharepoint.name
+          username: req.user.dbUser.sharepoint.loginName
         });
       });
   }

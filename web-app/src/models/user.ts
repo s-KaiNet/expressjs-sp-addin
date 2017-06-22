@@ -2,17 +2,17 @@ import { Schema, Document, Model, model } from 'mongoose';
 
 export interface IUserModel extends Document {
     sharepoint: {
-        name: string,
+        loginName: string,
         email: string,
-        username: string
+        displayName: string
     }
 }
 
 const userSchema = new Schema({
     sharepoint: {
-        name: String,
+        loginName: String,
         email: String,
-        username: String
+        displayName: String
     }
 });
 
