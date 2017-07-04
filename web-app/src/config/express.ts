@@ -11,7 +11,7 @@ import config from './config';
 import configurePassport from './passport';
 import * as nodeFetch from 'node-fetch';
 import fetch from 'node-fetch';
-import * as pnp from 'c:/Projects/gh/frk/PnP-JS-Core/src/pnp';
+import * as pnp from 'sp-pnp-js';
 
 declare var global: any;
 

@@ -1,5 +1,5 @@
 import { Request, Response, Router, NextFunction } from 'express';
-import * as pnp from 'c:/Projects/gh/frk/PnP-JS-Core/src/pnp';
+import * as pnp from 'sp-pnp-js';
 
 import { oauthConfig } from '../config/private.config';
 import { SPContextProvider } from 'passport-sharepoint-addin';
@@ -18,7 +18,9 @@ export class IndexRoute {
     ctx.getUserAccessTokenForSPHost()
       .then(token => {
         return pnp.sp.configure({
-          'Authorization': `Bearer ${token}`
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
         }, req.user.authData.spHostUrl);
       })
       .then(sp => {
