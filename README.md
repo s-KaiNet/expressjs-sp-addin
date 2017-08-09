@@ -1,5 +1,7 @@
 # SharePoint add-in with Express.js and PnP-JS-Core
 
+### Need help on SharePoint with Node.JS? Join our gitter chat and ask question! [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/sharepoint-node/Lobby)
+
 This repository contains sample SharePoint add-in built with Node.js. Technologies used: 
  - [Experss.js](https://expressjs.com/) web framework
  - [Passport.js](http://passportjs.org) authentication with help of [passport-sharepoint-addin](https://github.com/s-KaiNet/passport-sharepoint-addin)
